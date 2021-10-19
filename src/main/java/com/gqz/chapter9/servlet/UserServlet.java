@@ -130,4 +130,25 @@ public class UserServlet extends HttpServlet {
         }
     }
 
+    /**
+     * 注册方法
+     * @param request
+     * @param response
+     */
+    private void signup(HttpServletRequest request,HttpServletResponse response) throws IOException {
+        Map parameterMap = request.getParameterMap();
+        User user = new User();
+        try {
+            BeanUtils.populate(user,parameterMap);
+
+            userService.insertUser(user);
+            response.sendRedirect("/user?action=findAll");
+
+        } catch (IllegalAccessException | InvocationTargetException | IOException e) {
+            e.printStackTrace();
+            response.getWriter().write("注册失败");
+        }
+
+    }
+
 }
