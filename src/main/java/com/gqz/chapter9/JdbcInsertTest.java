@@ -14,7 +14,6 @@ public class JdbcInsertTest{
 			user.setAddress("河北省石家庄市灵寿县岔头镇小县城");
 			user.setGender("男");
 			user.setNickname("gqz2019");
-			user.setStatus("1");
 			boolean b=ud.insert(user);
 			System.out.println(b);
 		}

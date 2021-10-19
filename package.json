@@ -15,8 +15,6 @@
   "license": "ISC",
   "dependencies": {
     "axios": "^0.22.0",
-    "element-ui": "^2.15.6",
-    "layui": "^2.6.8",
-    "vue": "^2.6.14"
+    "layui": "^2.6.8"
   }
 }

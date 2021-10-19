@@ -26,8 +26,8 @@ public class UsersDao {
 //            stmt = conn.createStatement();
             // 发送SQL语句
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-            String sql = "insert into user(id, username, password, address, nickname, gender, email, status)" +
-                    "values(null,?,?,?,?,?,?,?)";
+            String sql = "insert into user(id, username, password, address, nickname, gender, email)" +
+                    "values(null,?,?,?,?,?,?)";
 
 //            int num = stmt.executeUpdate(sql);
             PreparedStatement ps = conn.prepareStatement(sql);
@@ -37,7 +37,6 @@ public class UsersDao {
             ps.setString(4, user.getNickname());
             ps.setString(5, user.getGender());
             ps.setString(6, user.getEmail());
-            ps.setString(7, user.getStatus());
             int num = ps.executeUpdate();
 
             if (num > 0) {
@@ -62,23 +61,29 @@ public class UsersDao {
     // 根据id查找指定的user
     public User find(int id) throws SQLException {
         String sql = "select * from user where id =?";
-        User query = queryRunner.query(sql, new BeanHandler<>(User.class),id);
+        User query = queryRunner.query(sql, new BeanHandler<>(User.class), id);
         return query;
     }
 
     // 删除用户
     public boolean delete(int id) throws SQLException {
         String sql = "delete from user where id=?";
-        int i = queryRunner.update(sql);
+        int i = queryRunner.update(sql,id);
 
         return i > 0;
     }
 
     // 修改用户
     public boolean update(User user) throws SQLException {
-        String sql = "update user set username=?,password=?,address=?,nickname=?,gender=?,email=?,status=? where id=?";
-        int i = queryRunner.update(sql, user.getUsername(), user.getPassword(), user, user.getAddress(), user.getNickname(), user.getNickname()
-                , user.getGender(), user.getEmail(), user.getStatus(),user.getId());
-        return i>0;
+        String sql = "update user set username=?,password=?,address=?,nickname=?,gender=?,email=? where id=?";
+        int i = queryRunner.update(sql,
+                user.getUsername(),
+                user.getPassword(),
+                user.getAddress(),
+                user.getNickname(),
+                user.getGender(),
+                user.getEmail(),
+                user.getId());
+        return i > 0;
     }
 }

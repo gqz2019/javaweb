@@ -10,7 +10,6 @@ import java.io.Serializable;
 @AllArgsConstructor
 @NoArgsConstructor
 public class User implements Serializable {
-
     private long id;
     private String username;
     private String password;
@@ -18,6 +17,5 @@ public class User implements Serializable {
     private String nickname;
     private String gender;
     private String email;
-    private String status;
 
 }
